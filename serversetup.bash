@@ -19,3 +19,6 @@ apt-get install -y build-essential libtool autotools-dev autoconf pkg-config lib
 add-apt-repository -y ppa:bitcoin/bitcoin
 apt-get update
 apt-get install -y libdb4.8-dev libdb4.8++-dev libboost-all-dev libevent-dev libminiupnpc-dev
+
+cd /root/
+git clone https://github.com/kanewinter/paybot.git
