@@ -4,12 +4,9 @@ COINCLI=$1
 OUTPUTS=$2
 NAME=`hostname`
 
-$COINCLI masternodelist | grep $OUTPUTS
-
-
-if $COINCLI masternodelist | grep -w $OUTPUTS; then
-  echo exists
+if $COINCLI masternodelist | grep -q -w $OUTPUTS; then
+  echo "$NAME exists on MNList"
 else
-  echo not found
+  echo "$NAME does not exist on MNList"
   ./nma.sh MNWatcher MNList "I don't see $NAME on the list" 2 &
 fi
