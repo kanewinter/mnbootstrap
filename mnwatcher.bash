@@ -4,7 +4,7 @@ COINCLI=$1
 OUTPUTS=$2
 NAME=`hostname`
 
-if $COINCLI masternodelist | grep -q -w $OUTPUTS; then
+if $COINCLI masternodelist | grep -w $OUTPUTS | grep -q ENABLED; then
   echo "$NAME exists on MNList"
 else
   echo "$NAME does not exist on MNList"
