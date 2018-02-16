@@ -14,6 +14,14 @@ fi
 echo "Setting SSH"
 sed -i '/Port 22/c\Port 31680' /etc/ssh/sshd_config
 
+#### Updates
+apt-get update
+apt-get -y upgrade
+apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libssl-dev software-properties-common git golang
+add-apt-repository -y ppa:bitcoin/bitcoin
+apt-get update
+apt-get install -y libdb4.8-dev libdb4.8++-dev libboost-all-dev libevent-dev libminiupnpc-dev
+
 cd /home/mentatmind
 git clone https://github.com/kanewinter/paybot.git
 mkdir /home/mentatmind/go
@@ -27,10 +35,4 @@ go get github.com/spf13/viper
 
 
 
-#### Updates
-apt-get update
-apt-get -y upgrade
-apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libssl-dev software-properties-common git
-add-apt-repository -y ppa:bitcoin/bitcoin
-apt-get update
-apt-get install -y libdb4.8-dev libdb4.8++-dev libboost-all-dev libevent-dev libminiupnpc-dev
+
