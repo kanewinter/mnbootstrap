@@ -3,7 +3,8 @@
 #### Add Swap
 if [ ! -f /mnt/2GB.swap ]; then
 echo "Adding Swap"
-fallocate -l 2G /mnt/2GB.swap
+dd if=/dev/zero of=/mnt/2GB.swap bs=1024 count=2097152
+chmod 600 /swapfile
 mkswap /mnt/2GB.swap
 swapon /mnt/2GB.swap
 echo "/mnt/2GB.swap  none  swap  sw 0  0" >> /etc/fstab
