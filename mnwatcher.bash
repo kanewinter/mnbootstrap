@@ -8,9 +8,8 @@ COINCLI=$1
 OUTPUTS=$2
 NAME=`hostname`
 
-if $COINCLI | grep shekel; then
-  echo "Shekel Detected"
-  if /usr/local/bin/shekel-cli masternode status | grep -w $OUTPUTS
+if [[ $COINCLI = *"shekel"* ]]; then
+  if /usr/local/bin/shekel-cli masternode status | grep -wq $OUTPUTS; then
     echo "$NAME Status shows Collateral"
   else
     echo "$NAME Status doesn't show collateral"
