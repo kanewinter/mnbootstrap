@@ -14,8 +14,10 @@ fi
 #### Set SSH
 echo "Setting SSH"
 sed -i '/Port 22/c\Port 31680' /etc/ssh/sshd_config
+systemctl restart sshd
 
 #### Updates
+echo "Updating"
 apt-get update
 apt-get -y upgrade
 apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libssl-dev software-properties-common git golang
@@ -23,15 +25,16 @@ add-apt-repository -y ppa:bitcoin/bitcoin
 apt-get update
 apt-get install -y libdb4.8-dev libdb4.8++-dev libboost-all-dev libevent-dev libminiupnpc-dev
 
+echo "Getting paybot"
 cd /home/mentatmind
 git clone https://github.com/kanewinter/paybot.git
+touch /home/mentatmind/paybot/customerdata.dat
+touch /home/mentatmind/paybot/payconfig.toml
 mkdir /home/mentatmind/go
 if [ -z $GOPATH ]; then
 echo "export GOPATH=/home/mentatmind/go" >> $HOME/.bashrc
 fi
-. $HOME/.bashrc
-touch customerdata.dat
-touch payconfig.toml
+source $HOME/.bashrc
 go get github.com/spf13/viper
 
 
