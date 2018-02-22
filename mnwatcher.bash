@@ -8,12 +8,15 @@ COINCLI=$1
 OUTPUTS=$2
 NAME=`hostname`
 
+###Add cmd variable and simplify this
+
+
 if [[ $COINCLI = *"shekel"* || $COINCLI = *"wagerr"* ]]; then
-  if $COINCLI masternode status | grep -wq $OUTPUTS; then
-    echo "$NAME Status shows Collateral"
+  if $COINCLI listmasternodes | grep -wq $OUTPUTS; then
+    echo "$NAME exists on MNList"
   else
-    echo "$NAME Status doesn't show collateral"
-    /home/mentatmind/mnbootstrap/nma.sh MNWatcher MNList "$NAME Status doesn't show collateral" 0 &
+    echo "$NAME does not exist on MNList"
+    /home/mentatmind/mnbootstrap/nma.sh MNWatcher MNList "I don't see $NAME on the list" 0 &
   fi
 else
 if $COINCLI masternodelist | grep -w $OUTPUTS | grep -q ENABLED; then
