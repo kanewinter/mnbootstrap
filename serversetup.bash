@@ -9,6 +9,7 @@ mkswap /mnt/2GB.swap
 swapon /mnt/2GB.swap
 echo "/mnt/2GB.swap  none  swap  sw 0  0" >> /etc/fstab
 echo "vm.swappiness=80" >> /etc/sysctl.conf
+sysctl --system
 fi
 
 #### Set SSH
